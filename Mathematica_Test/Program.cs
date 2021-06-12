@@ -24,9 +24,8 @@ namespace Mathematica_Test
 			values.Add(row1);
 			values.Add(row2);
 			//values.Add(row3);
-			Matrix matrix = Matrix.CreateMatrix(values);
-			matrix.PrintValues();
-			matrix.GetRowVector(1).PrintValues();
+			Matrix.GetSumOfMultiple(Matrix.CreateMatrix(values));
+			
 
 
 			//////////////////////////////////////////////

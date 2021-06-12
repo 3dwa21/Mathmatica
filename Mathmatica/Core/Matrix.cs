@@ -624,7 +624,6 @@ namespace Mathmatica
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Operations
 		#region Operations
-		// TODO: GetSumMultiple() and GetDiffMultiple
 		/// <summary>
 		///		Calculates the determinant of the matrix.
 		/// </summary>
@@ -661,6 +660,59 @@ namespace Mathmatica
 			}
 			throw new InvalidDimensionException();
 		}
+
+		/// <summary>
+		///		Returns sum of multiple matrices
+		/// </summary>
+		/// <param name="matrices"></param>
+		/// <returns></returns>
+		public static Matrix GetSumOfMultiple(params Matrix[] matrices)
+		{
+			if (Utils.IsAnyNull(matrices))
+			{
+				throw new ArgumentNullException();
+			}
+
+			if (!Matrix.AreAllSameDimension(matrices))
+			{
+				throw new ArgumentException("All matrices need to have same dimension");
+			}
+
+			Matrix sum = Matrix.CreateZeroMatrix(matrices[0].GetNumberOfColumns(), matrices[0].GetNumberOfRows());
+			foreach (Matrix matrix in matrices)
+			{
+				sum += matrix;
+			}
+
+			return sum;
+		}
+
+		/// <summary>
+		///		Returns difference of multiple matrices
+		/// </summary>
+		/// <param name="matrices"></param>
+		/// <returns></returns>
+		public static Matrix GetDiffOfMultiple(params Matrix[] matrices)
+		{
+			if (Utils.IsAnyNull(matrices))
+			{
+				throw new ArgumentNullException();
+			}
+
+			if (!Matrix.AreAllSameDimension(matrices))
+			{
+				throw new ArgumentException("All matrices need to have same dimension");
+			}
+
+			Matrix diff = Matrix.CreateMatrix(matrices[0]);
+			for (int i = 1; i < matrices.Length; i++)
+			{
+				diff -= matrices[i];
+			}
+
+			return diff;
+		}
+
 
 		/// <summary>
 		///		Returns symmetric matrix
@@ -958,7 +1010,6 @@ namespace Mathmatica
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Methods
-		// TODO: GetRow(i) and GetColumn(i) Methods
 		#region Methods
 		/// <summary>
 		///		Checks Equality
@@ -1149,6 +1200,44 @@ namespace Mathmatica
 			}
 
 			this.matrix[n][m] = Convert.ToDecimal(value);
+		}
+		#endregion
+
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Utils
+		#region Utils
+		/// <summary>
+		///		Checks if all given matrices have same dimension
+		///		If only one matrix was entered the method will return true since all are same dimension
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		public static bool AreAllSameDimension(params Matrix[] input)
+		{
+			if (Utils.IsAnyNull(input))
+			{
+				throw new ArgumentNullException();
+			}
+
+			int dimensionN = -1;
+			int dimensionM = -1;
+			foreach (Matrix matrix in input)
+			{
+				if (dimensionM == -1 && dimensionN == -1)
+				{
+					dimensionN = matrix.n;
+					dimensionM = matrix.m;
+				}
+				else
+				{
+					if (matrix.GetNumberOfRows() != dimensionM || matrix.GetNumberOfColumns() != dimensionN)
+					{
+						return false;
+					}
+				}
+			}
+			return true;
 		}
 		#endregion
 	}

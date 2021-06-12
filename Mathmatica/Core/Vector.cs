@@ -428,10 +428,9 @@ namespace Mathmatica
 		/// <summary>
 		///		Returns sum of multiple vectors
 		/// </summary>
-		/// <param name="firstVector"></param>
 		/// <param name="vectors"></param>
 		/// <returns></returns>
-		public Vector GetSumOfMultiple(params Vector[] vectors)
+		public static Vector GetSumOfMultiple(params Vector[] vectors)
 		{
 			if (Utils.IsAnyNull(vectors))
 			{
@@ -455,10 +454,9 @@ namespace Mathmatica
 		/// <summary>
 		///		Returns difference of multiple vectors
 		/// </summary>
-		/// <param name="firstVector"></param>
 		/// <param name="vectors"></param>
 		/// <returns></returns>
-		public Vector GetDiffOfMultiple(params Vector[] vectors)
+		public static Vector GetDiffOfMultiple(params Vector[] vectors)
 		{
 			if (Utils.IsAnyNull(vectors))
 			{
@@ -657,7 +655,6 @@ namespace Mathmatica
 		///		Checks if all given vectors have same dimension
 		///		If only one vector was entered the method will return true since all are same dimension
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
 		/// <param name="input"></param>
 		/// <returns></returns>
 		public static bool AreAllSameDimension(params Vector[] input)
