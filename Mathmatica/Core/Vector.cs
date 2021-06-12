@@ -487,11 +487,58 @@ namespace Mathmatica
 		}
 
 		/// <summary>
+		///		Checks if two vectors are antiparallel to each other
+		/// </summary>
+		/// <param name="vector"></param>
+		/// <returns></returns>
+		public bool IsAnitParallel(Vector vector)
+		{
+			if (Utils.IsAnyNull(vector))
+			{
+				throw new ArgumentNullException();
+			}
+
+			if (this.GetDimension() != vector.GetDimension())
+			{
+				throw new UnevenDimensionException("Vectors");
+			}
+
+			if (this.GetDimension() == 1)
+			{
+				if (this.vector[0] == vector.vector[0])
+				{
+					return true;
+				}
+				return false;
+			}
+			else if (this.GetDimension() > 1)
+			{
+				decimal k = this.vector[0] / vector.vector[0];
+				if (k < 0)
+				{
+					return false;
+				}
+				for (int i = 1; i < this.GetDimension(); i++)
+				{
+					if (this.vector[i] != k * vector.vector[i])
+					{
+						return false;
+					}
+				}
+				return true;
+			}
+			else
+			{
+				throw new InvalidSizeException();
+			}
+		}
+
+		/// <summary>
 		///		Checks if two vectors are inverse to each other
 		/// </summary>
 		/// <param name="vector"></param>
 		/// <returns></returns>
-		public bool isInverse(Vector vector)
+		public bool IsInverse(Vector vector)
 		{
 			return (this.IsOpposite(vector) && this.GetLength() == vector.GetLength());
 		}
@@ -579,53 +626,6 @@ namespace Mathmatica
 				}
 				return true;
 			} 
-			else
-			{
-				throw new InvalidSizeException();
-			}
-		}
-
-		/// <summary>
-		///		Checks if two vectors are rectified to each other
-		/// </summary>
-		/// <param name="vector"></param>
-		/// <returns></returns>
-		public bool IsRectified(Vector vector)
-		{
-			if (Utils.IsAnyNull(vector))
-			{
-				throw new ArgumentNullException();
-			}
-
-			if (this.GetDimension() != vector.GetDimension())
-			{
-				throw new UnevenDimensionException("Vectors");
-			}
-
-			if (this.GetDimension() == 1)
-			{
-				if (this.vector[0] == vector.vector[0])
-				{
-					return true;
-				}
-				return false;
-			}
-			else if (this.GetDimension() > 1)
-			{
-				decimal k = this.vector[0] / vector.vector[0];
-				if (k < 0)
-				{
-					return false;
-				}
-				for (int i = 1; i < this.GetDimension(); i++)
-				{
-					if (this.vector[i] != k * vector.vector[i])
-					{
-						return false;
-					}
-				}
-				return true;
-			}
 			else
 			{
 				throw new InvalidSizeException();
