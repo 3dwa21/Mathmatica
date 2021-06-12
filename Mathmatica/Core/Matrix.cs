@@ -713,7 +713,6 @@ namespace Mathmatica
 			return diff;
 		}
 
-
 		/// <summary>
 		///		Returns symmetric matrix
 		/// </summary>
