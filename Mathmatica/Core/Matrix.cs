@@ -11,8 +11,8 @@ namespace Mathmatica
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/// Parameters
 		/// 
-		private int n = 0;	// Spalten
-		private int m = 0;  // Zeilen
+		private int n = 0;	// Columns
+		private int m = 0;  // Rows
 
 		public List<List<decimal>> matrix;
 
@@ -974,6 +974,36 @@ namespace Mathmatica
 		}
 
 		/// <summary>
+		///		Returns single column of matrix at index i
+		/// </summary>
+		/// <param name="i"></param>
+		/// <returns></returns>
+		public List<decimal> GetColumn(int i)
+		{
+			if (!Utils.AreValidIndexes(new Tuple<int, int>(i, this.n)))
+			{
+				throw new IndexOutOfRangeException();
+			}
+
+			List<decimal> column = new List<decimal>();
+			foreach(List<decimal> row in this.matrix)
+			{
+				column.Add(row[i]);
+			}
+			return column;
+		}
+
+		/// <summary>
+		///		Returns single column of matrix at index i
+		/// </summary>
+		/// <param name="i"></param>
+		/// <returns></returns>
+		public Vector GetColumnVector(int i)
+		{
+			return Vector.CreateVector(this.GetColumn(i));
+		}
+
+		/// <summary>
 		///		Returns value at handed position where as n determines the row and m the column.
 		/// </summary>
 		/// <param name="n"></param>
@@ -981,7 +1011,7 @@ namespace Mathmatica
 		/// <returns></returns>
 		public decimal GetElement(int n, int m)
 		{
-			if (Utils.AreValidIndexes(new Tuple<int, int>(n, this.n), new Tuple<int, int>(m, this.m)))
+			if (!Utils.AreValidIndexes(new Tuple<int, int>(n, this.n), new Tuple<int, int>(m, this.m)))
 			{
 				throw new IndexOutOfRangeException();
 			}
@@ -1021,6 +1051,31 @@ namespace Mathmatica
 		}
 
 		/// <summary>
+		///		Returns single row of matrix at index i
+		/// </summary>
+		/// <param name="i"></param>
+		/// <returns></returns>
+		public List<decimal> GetRow(int i)
+		{
+			if (!Utils.AreValidIndexes(new Tuple<int, int>(i, this.m)))
+			{
+				throw new IndexOutOfRangeException();
+			}
+
+			return this.matrix[i];
+		}
+
+		/// <summary>
+		///		Returns single row of matrix at index i
+		/// </summary>
+		/// <param name="i"></param>
+		/// <returns></returns>
+		public Vector GetRowVector(int i)
+		{
+			return Vector.CreateVector(this.GetRow(i));
+		}
+
+		/// <summary>
 		///		Get the matrix' values as Lists within List containing decimals.
 		/// </summary>
 		/// <returns></returns>
@@ -1056,7 +1111,7 @@ namespace Mathmatica
 		/// <param name="value"></param>
 		public void SetElement(int n, int m, int value)
 		{
-			if (Utils.AreValidIndexes(new Tuple<int, int>(n, this.n), new Tuple<int, int>(m, this.m)))
+			if (!Utils.AreValidIndexes(new Tuple<int, int>(n, this.n), new Tuple<int, int>(m, this.m)))
 			{
 				throw new IndexOutOfRangeException();
 			}
@@ -1072,7 +1127,7 @@ namespace Mathmatica
 		/// <param name="value"></param>
 		public void SetElement(int n, int m, decimal value)
 		{
-			if (Utils.AreValidIndexes(new Tuple<int, int>(n, this.n), new Tuple<int, int>(m, this.m)))
+			if (!Utils.AreValidIndexes(new Tuple<int, int>(n, this.n), new Tuple<int, int>(m, this.m)))
 			{
 				throw new IndexOutOfRangeException();
 			}
@@ -1088,7 +1143,7 @@ namespace Mathmatica
 		/// <param name="value"></param>
 		public void SetElement(int n, int m, float value)
 		{
-			if (Utils.AreValidIndexes(new Tuple<int, int>(n, this.n), new Tuple<int, int>(m, this.m)))
+			if (!Utils.AreValidIndexes(new Tuple<int, int>(n, this.n), new Tuple<int, int>(m, this.m)))
 			{
 				throw new IndexOutOfRangeException();
 			}

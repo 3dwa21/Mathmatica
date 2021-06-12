@@ -563,7 +563,7 @@ namespace Mathmatica
 		/// <returns></returns>
 		public decimal GetElement(int n)
 		{
-			if (Utils.AreValidIndexes(new Tuple<int, int>(n, this.n)))
+			if (!Utils.AreValidIndexes(new Tuple<int, int>(n, this.n)))
 			{
 				throw new IndexOutOfRangeException();
 			}
@@ -613,7 +613,7 @@ namespace Mathmatica
 		/// <param name="value"></param>
 		public void SetElement(int n, int value)
 		{
-			if (Utils.AreValidIndexes(new Tuple<int, int>(n, this.n)))
+			if (!Utils.AreValidIndexes(new Tuple<int, int>(n, this.n)))
 			{
 				throw new IndexOutOfRangeException();
 			}
@@ -627,7 +627,7 @@ namespace Mathmatica
 		/// <param name="value"></param>
 		public void SetElement(int n, decimal value)
 		{
-			if (Utils.AreValidIndexes(new Tuple<int, int>(n, this.n)))
+			if (!Utils.AreValidIndexes(new Tuple<int, int>(n, this.n)))
 			{
 				throw new IndexOutOfRangeException();
 			}
@@ -641,7 +641,7 @@ namespace Mathmatica
 		/// <param name="value"></param>
 		public void SetElement(int n, float value)
 		{
-			if (Utils.AreValidIndexes(new Tuple<int, int>(n, this.n)))
+			if (!Utils.AreValidIndexes(new Tuple<int, int>(n, this.n)))
 			{
 				throw new IndexOutOfRangeException();
 			}
