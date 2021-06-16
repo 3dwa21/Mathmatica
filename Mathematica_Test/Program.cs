@@ -1,4 +1,5 @@
 ﻿using Mathmatica;
+using Mathmatica.Core;
 using System;
 using System.Collections.Generic;
 
@@ -22,10 +23,10 @@ namespace Mathematica_Test
 			row3.Add(8);
 			row3.Add(9);
 			values.Add(row1);
-			values.Add(row2);
+			//values.Add(row2);
 			//values.Add(row3);
-			Matrix.GetSumOfMultiple(Matrix.CreateMatrix(values));
-			
+
+			new ComplexNumber(5, -2).PrintValues();
 
 
 			//////////////////////////////////////////////

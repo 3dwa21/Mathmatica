@@ -12,7 +12,7 @@ namespace Mathmatica
 		/// Parameters
 		/// 
 		private int n = 0;	// Columns
-		private int m = 0;  // Rows
+		private int m = 0;  // Rows (Contains list of columns)
 
 		public List<List<decimal>> matrix;
 
@@ -374,6 +374,7 @@ namespace Mathmatica
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Operators
+		// TODO: Operators with Vecotrs
 		#region Operators
 		/// <summary>
 		///		Adding two matrices together.
@@ -1010,6 +1011,31 @@ namespace Mathmatica
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Methods
 		#region Methods
+		/// <summary>
+		///		Converts matrix into a vector
+		/// </summary>
+		/// <returns></returns>
+		public Vector ConvertToVector()
+		{
+			if (this.n == 1)
+			{
+				List<decimal> values = new List<decimal>();
+				foreach(List<decimal> column in this.matrix)
+				{
+					values.Add(column[0]);
+				}
+				return Vector.CreateVector(values);
+			}
+			else if (this.m == 1)
+			{
+				return Vector.CreateVector(this.matrix[0]);
+			} 
+			else
+			{
+				throw new InvalidDimensionException("Matrix can only have one column or one row to be converted to a vactor!");
+			}
+		}
+
 		/// <summary>
 		///		Checks Equality
 		/// </summary>

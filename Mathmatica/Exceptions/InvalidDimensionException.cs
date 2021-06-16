@@ -10,5 +10,8 @@ namespace Mathmatica.Exceptions
 
 		public InvalidDimensionException(int minDimension)
 			: base(String.Format("Dimension must be {0} or greater", minDimension)) { }
+
+		public InvalidDimensionException(String message)
+			: base(message) { }
 	}
 }

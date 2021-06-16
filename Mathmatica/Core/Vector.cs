@@ -411,6 +411,13 @@ namespace Mathmatica
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Operations
 		#region Operations
+
+		public bool AreLinearDependent(params Vector[] vectors)
+		{
+			// TODO
+			return false;
+		}
+
 		/// <summary>
 		///		Returns length of vector
 		/// </summary>
@@ -637,6 +644,37 @@ namespace Mathmatica
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Methods
 		#region Methods
+		/// <summary>
+		///		Converts Vector into a horizontal matrix where n = n and m = 1
+		/// </summary>
+		/// <returns></returns>
+		public Matrix ConvertToHorizontalMatrix()
+		{
+			List<List<decimal>> values = new List<List<decimal>>
+			{
+				this.vector
+			};
+			return Matrix.CreateMatrix(values);
+		}
+
+		/// <summary>
+		///		Converts Vector into a vertical matrix where n = 1 and m = n
+		/// </summary>
+		/// <returns></returns>
+		public Matrix ConvertToVerticalMatrix()
+		{
+			List<List<decimal>> values = new List<List<decimal>>();
+			foreach (decimal value in this.vector)
+			{
+				List<decimal> rowValue = new List<decimal>
+				{
+					value
+				};
+				values.Add(rowValue);
+			}
+			return Matrix.CreateMatrix(values);
+		}
+
 		/// <summary>
 		///		Checks Equality
 		/// </summary>
