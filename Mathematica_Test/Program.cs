@@ -1,5 +1,6 @@
 ﻿using Mathmatica;
 using Mathmatica.Core;
+using Mathmatica.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -26,7 +27,19 @@ namespace Mathematica_Test
 			//values.Add(row2);
 			//values.Add(row3);
 
-			new ComplexNumber(5, -2).PrintValues();
+			List<INumber> list = new List<INumber>
+			{
+				new Number(5),
+				new Number(3.6),
+				new ComplexNumber(4, 6),
+				new Number(-15),
+				new ComplexNumber(5, -4)
+			};
+
+			foreach (INumber number in list)
+			{
+				number.PrintValues();
+			}
 
 
 			//////////////////////////////////////////////

@@ -1,16 +1,15 @@
 ﻿using DecimalMathLib;
+using Mathmatica.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Mathmatica.Core
 {
-	public class ComplexNumber
+	public class ComplexNumber : INumber
 	{
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		/// Parameters
+		/// Properties & Fields
 		/// 
-		private readonly decimal realPart;
+		public decimal Value { get; set; }
 		private readonly decimal imaginaryPart;
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +20,7 @@ namespace Mathmatica.Core
 		#region Contructors
 		public ComplexNumber(decimal realPart, decimal imaginaryPart)
 		{
-			this.realPart = realPart;
+			this.Value = realPart;
 			this.imaginaryPart = imaginaryPart;
 		}
 		#endregion
@@ -47,7 +46,7 @@ namespace Mathmatica.Core
 				throw new ArgumentNullException();
 			}
 
-			decimal sumRealPart = complex1.realPart + complex2.realPart;
+			decimal sumRealPart = complex1.Value + complex2.Value;
 			decimal sumImaginaryPart = complex1.imaginaryPart + complex2.imaginaryPart;
 			return new ComplexNumber(sumRealPart, sumImaginaryPart);
 		}
@@ -65,7 +64,7 @@ namespace Mathmatica.Core
 				throw new ArgumentNullException();
 			}
 
-			decimal sumRealPart = complex1.realPart - complex2.realPart;
+			decimal sumRealPart = complex1.Value - complex2.Value;
 			decimal sumImaginaryPart = complex1.imaginaryPart - complex2.imaginaryPart;
 			return new ComplexNumber(sumRealPart, sumImaginaryPart);
 		}
@@ -83,7 +82,7 @@ namespace Mathmatica.Core
 				throw new ArgumentNullException();
 			}
 
-			if (complex1.realPart != complex2.realPart || complex1.imaginaryPart != complex2.imaginaryPart)
+			if (complex1.Value != complex2.Value || complex1.imaginaryPart != complex2.imaginaryPart)
 			{
 				return false;
 			}
@@ -103,7 +102,7 @@ namespace Mathmatica.Core
 				throw new ArgumentNullException();
 			}
 
-			if (complex1.realPart == complex2.realPart || complex1.imaginaryPart == complex2.imaginaryPart)
+			if (complex1.Value == complex2.Value || complex1.imaginaryPart == complex2.imaginaryPart)
 			{
 				return false;
 			}
@@ -120,7 +119,7 @@ namespace Mathmatica.Core
 		/// <returns></returns>
 		public decimal GetLength()
 		{
-			return DecimalMath.Sqrt(DecimalMath.Pow(this.realPart, 2) + DecimalMath.Pow(this.imaginaryPart, 2));
+			return DecimalMath.Sqrt(DecimalMath.Pow(this.Value, 2) + DecimalMath.Pow(this.imaginaryPart, 2));
 		}
 		#endregion
 
@@ -135,8 +134,8 @@ namespace Mathmatica.Core
 		public override bool Equals(object obj)
 		{
 			return obj is ComplexNumber number &&
-				   realPart == number.realPart &&
-				   imaginaryPart == number.imaginaryPart;
+				   this.Value == number.Value &&
+				   this.imaginaryPart == number.imaginaryPart;
 		}
 
 		/// <summary>
@@ -146,7 +145,7 @@ namespace Mathmatica.Core
 		public override int GetHashCode()
 		{
 			var hashCode = 1951953771;
-			hashCode = hashCode * -1521134295 + realPart.GetHashCode();
+			hashCode = hashCode * -1521134295 + Value.GetHashCode();
 			hashCode = hashCode * -1521134295 + imaginaryPart.GetHashCode();
 			return hashCode;
 		}
@@ -166,7 +165,7 @@ namespace Mathmatica.Core
 		/// <returns></returns>
 		public decimal GetRealPart()
 		{
-			return this.realPart;
+			return this.Value;
 		}
 
 		/// <summary>
@@ -174,7 +173,7 @@ namespace Mathmatica.Core
 		/// </summary>
 		public void PrintValues()
 		{
-			String output = this.realPart.ToString();
+			String output = this.Value.ToString();
 			if (this.imaginaryPart >= 0)
 			{
 				output += " + ";
