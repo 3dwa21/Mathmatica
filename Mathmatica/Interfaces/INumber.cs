@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Mathmatica.Interfaces
+﻿namespace Mathmatica.Interfaces
 {
 	public interface INumber
 	{
