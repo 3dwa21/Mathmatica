@@ -41,6 +41,8 @@ namespace Mathematica_Test
 				number.PrintValues();
 			}
 
+			Console.WriteLine(4.75m % 1.5m);
+
 
 			//////////////////////////////////////////////
 			// Stop before end							//
