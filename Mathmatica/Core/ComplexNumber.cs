@@ -10,7 +10,7 @@ namespace Mathmatica.Core
 		/// Properties & Fields
 		/// 
 		public decimal Value { get; set; }
-		private readonly decimal imaginaryPart;
+		private readonly decimal imaginaryValue;
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Constructor Management
@@ -21,7 +21,7 @@ namespace Mathmatica.Core
 		public ComplexNumber(decimal realPart, decimal imaginaryPart)
 		{
 			this.Value = realPart;
-			this.imaginaryPart = imaginaryPart;
+			this.imaginaryValue = imaginaryPart;
 		}
 		#endregion
 
@@ -47,7 +47,7 @@ namespace Mathmatica.Core
 			}
 
 			decimal sumRealPart = complex1.Value + complex2.Value;
-			decimal sumImaginaryPart = complex1.imaginaryPart + complex2.imaginaryPart;
+			decimal sumImaginaryPart = complex1.imaginaryValue + complex2.imaginaryValue;
 			return new ComplexNumber(sumRealPart, sumImaginaryPart);
 		}
 
@@ -65,7 +65,7 @@ namespace Mathmatica.Core
 			}
 
 			decimal sumRealPart = complex1.Value - complex2.Value;
-			decimal sumImaginaryPart = complex1.imaginaryPart - complex2.imaginaryPart;
+			decimal sumImaginaryPart = complex1.imaginaryValue - complex2.imaginaryValue;
 			return new ComplexNumber(sumRealPart, sumImaginaryPart);
 		}
 
@@ -82,7 +82,7 @@ namespace Mathmatica.Core
 				throw new ArgumentNullException();
 			}
 
-			if (complex1.Value != complex2.Value || complex1.imaginaryPart != complex2.imaginaryPart)
+			if (complex1.Value != complex2.Value || complex1.imaginaryValue != complex2.imaginaryValue)
 			{
 				return false;
 			}
@@ -102,7 +102,7 @@ namespace Mathmatica.Core
 				throw new ArgumentNullException();
 			}
 
-			if (complex1.Value == complex2.Value || complex1.imaginaryPart == complex2.imaginaryPart)
+			if (complex1.Value == complex2.Value || complex1.imaginaryValue == complex2.imaginaryValue)
 			{
 				return false;
 			}
@@ -119,7 +119,7 @@ namespace Mathmatica.Core
 		/// <returns></returns>
 		public decimal GetLength()
 		{
-			return DecimalMath.Sqrt(DecimalMath.Pow(this.Value, 2) + DecimalMath.Pow(this.imaginaryPart, 2));
+			return DecimalMath.Sqrt(DecimalMath.Pow(this.Value, 2) + DecimalMath.Pow(this.imaginaryValue, 2));
 		}
 		#endregion
 
@@ -135,7 +135,7 @@ namespace Mathmatica.Core
 		{
 			return obj is ComplexNumber number &&
 				   this.Value == number.Value &&
-				   this.imaginaryPart == number.imaginaryPart;
+				   this.imaginaryValue == number.imaginaryValue;
 		}
 
 		/// <summary>
@@ -146,24 +146,24 @@ namespace Mathmatica.Core
 		{
 			var hashCode = 1951953771;
 			hashCode = hashCode * -1521134295 + Value.GetHashCode();
-			hashCode = hashCode * -1521134295 + imaginaryPart.GetHashCode();
+			hashCode = hashCode * -1521134295 + imaginaryValue.GetHashCode();
 			return hashCode;
 		}
 
 		/// <summary>
-		///		Returns imaginary part of complex number
+		///		Returns imaginary value of complex number
 		/// </summary>
 		/// <returns></returns>
-		public decimal GetImaginaryPart()
+		public decimal GetImaginaryValue()
 		{
-			return this.imaginaryPart;
+			return this.imaginaryValue;
 		}
 
 		/// <summary>
-		///		Returns real part of complex number
+		///		Returns real value of complex number
 		/// </summary>
 		/// <returns></returns>
-		public decimal GetRealPart()
+		public decimal GetRealValue()
 		{
 			return this.Value;
 		}
@@ -174,7 +174,7 @@ namespace Mathmatica.Core
 		public void PrintValues()
 		{
 			String output = this.Value.ToString();
-			if (this.imaginaryPart >= 0)
+			if (this.imaginaryValue >= 0)
 			{
 				output += " + ";
 			}
@@ -182,9 +182,9 @@ namespace Mathmatica.Core
 			{
 				output += " - ";
 			}
-			if (Math.Abs(this.imaginaryPart) > 1)
+			if (Math.Abs(this.imaginaryValue) > 1)
 			{
-				output += Math.Abs(this.imaginaryPart);
+				output += Math.Abs(this.imaginaryValue);
 			}
 			output += "i";
 			Console.WriteLine(output);
